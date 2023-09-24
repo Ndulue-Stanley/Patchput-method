@@ -56,11 +56,14 @@ const Server = http.createServer((req:IncomingMessage, res: ServerResponse<Incom
         res.end()
     }
     //POST METHOD
-    if(url === '/homepage' && method === 'POST'){
+    if(url === '/homepage' && method === 'POST')
+    {
         status = 201
         response.data = dummyData;
         response.message = 'New User Accepted'
         response.success = true;
+        const body = JSON.parse(Container);
+                  dummyData.push(body);
         res.write(JSON.stringify({response, status}))
         res.end()
     }
@@ -82,7 +85,64 @@ const Server = http.createServer((req:IncomingMessage, res: ServerResponse<Incom
             res.write(JSON.stringify({response, status}))
             res.end()
         }else{
+            const  updatename = build.name
 
+            dummyData = dummyData.map((user:any)=>{
+                if(user?.id === targetValue){
+                    return {
+                        id: user?.id,
+                        name: updatename,
+                        stack: user?.stack
+                    }
+                }
+                return user
+            })
+            status = 200
+            response.data = dummyData
+            response.message = 'User Account Details Updated'
+            response.success = true
+            res.write(JSON.stringify({response, status}))
+            res.end()
+        }
+
+    }
+    
+    if(method === 'PUT'){
+        const build = JSON.parse(Container)
+
+        let userInfo: any = url?.split("/")[1]
+        let userNumber = parseInt(userInfo)
+
+        let findTarget = dummyData.some((el)=>{
+            return el?.id === userNumber
+        })
+        if(findTarget === false){
+            status = 404
+            response.data = null
+            response.message = 'User not found'
+            response.success = false
+            res.write(JSON.stringify({response, status}))
+            res.end()
+        }else{
+            const updatename = build.name
+            const updateage = build.age
+            
+            dummyData = dummyData.map((user:any)=>{
+                if(user?.id === userNumber){
+                    return{
+                        id: user?.id,
+                        name: updatename,
+                        age: updateage
+                    }
+                }
+                return user;
+            })
+            status = 200
+            response.data = dummyData
+            response.message = 'Done already'
+            response.success = true
+            res.write(JSON.stringify({response, status}))
+            res.end()
         }
     }
   })
