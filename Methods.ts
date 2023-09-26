@@ -110,7 +110,6 @@
 //                   age: user?.age,
 //                 };
 //               }
-
 //               return user;
 //             });
 
@@ -173,15 +172,27 @@
 //             resp.end();
 //           }
 //         }
-
-//        if(method === 'DELETE'){
+  
+  
+  
+//         if(method === 'DELETE'){
 //         let path: any = url?.split("/")[1]
 //         let change = parseInt(path);
 
 //         let find = Data.some((el)=>{
 //             return el?.id === change;
 //         });
-//         if(find === false){}
+//         if(find === false){
+//             Status = 404;
+            
+//             (response.message = "User not Found"),
+//               (response.data = null),
+//               (response.success = false);
+
+//             resp.write(JSON.stringify({ response, Status }));
+
+//             resp.end();
+//         }
 //         else{
 //             Data = Data?.map((el:any)=>{
 //                 if(el?.id === change){

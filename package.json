@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --respawn  ./Practice.ts"
+    "start": "ts-node-dev --respawn  ./AdvanceHttp.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^20.6.3"
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.6.3",
+    "axios": "^1.5.0"
   }
 }
